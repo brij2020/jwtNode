@@ -18,6 +18,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 app.use('/api/user',authRouter);
+
+
+/**
+ *  Server Listen  
+ *
+ */
 connection()(()=>{
     app.listen(8080,()=>console.log("server is up and listen on port 8080"));
 });
