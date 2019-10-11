@@ -24,7 +24,5 @@ app.use('/api/user',authRouter);
  *  Server Listen  
  *
  */
-connection()(()=>{
-    app.listen(8080,()=>console.log("server is up and listen on port 8080"));
-});
-//app.listen(8080,()=>console.log("server is up and listen on port 8080"));
+const server = ()=>app.listen(8080,()=>console.log("server is up and listen on port 8080"));
+connection()(server);
