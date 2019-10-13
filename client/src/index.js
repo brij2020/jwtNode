@@ -1,12 +1,15 @@
-import React from 'react';
+import React,{useState}from 'react';
 import ReactDOM from "react-dom";
-
-
+import Login from './component/login'
+import InternalRouter from './projectRouter'
 function App () {
+    const [counter,setCounter] = useState(0)
     return (<div>
-        Hello React Sckelton
+        <Login />
+        Hello React Sckelton <p>{counter}</p> 
+        <div className="counter">
+            <button onClick={()=>setCounter(counter+1)}>+</button>    
+        </div>
     </div>)
 }
-ReactDOM.render(<App /> , document.getElementById('root'));
-
-console.log("hello, world  ruby" )
+ReactDOM.render(<InternalRouter /> , document.getElementById('root'));

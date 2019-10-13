@@ -14,7 +14,7 @@ const path                      = require('path')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
- // parse application/json
+// parse application/json
 app.use(bodyParser.json())
 
 /****************  API Router ***********************/
@@ -23,22 +23,14 @@ app.use('/api/user',authRouter);
 
 
 
-
-/******************* Express Serve stattic files [ creating virtula path ]************************/
+/******************* Express Serve stattic files [ creating virtula path ]*******************/
 app.set('client',path.join(__dirname,'./../client'))
 app.use('/dist',express.static(path.join(__dirname,'./../dist')))
-app.use('/css',express.static(path.join(__dirname,'../client/public/css')))
-app.use('/images',express.static(path.join(__dirname,'../client/public/images')))
-app.use('/img',express.static(path.join(__dirname,'../client/public/img')))
-app.use('/js',express.static(path.join(__dirname,'../client/public/js')))
+app.use(express.static(path.join(__dirname,'../client/public')))
 app.get('*',(req,res)=>{
     res.sendFile('index.html',{root:path.join(__dirname,'../client/public/html/')})
 })
-/*****************  React End  *******************/
-
-
-
-
+/**************************************  React End  ******************************************/
 
 
 

@@ -1,9 +1,9 @@
 const path  =  require('path');
 
 module.exports  = {
-    entry : { main : path.resolve(__dirname,'client/src/index.js') },
+    entry : [ path.resolve(__dirname,'client/src/index.js') ],
     output:{
-        filename:'[name].js',
+        filename:'main.js',
         path : path.resolve(__dirname,'dist/')
     },
     mode :"development",
@@ -20,7 +20,25 @@ module.exports  = {
               plugins: ['@babel/plugin-proposal-object-rest-spread']
             }
           }
+        },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true, // webpack@1.x
+                disable: true, // webpack@2.x and newer
+              },
+            },
+          ],
         }
+      
       ]
     }
 }
