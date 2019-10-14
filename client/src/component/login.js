@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import * as constant from '../Constant'
 import verifyCorrectPassword from '../utility/validation'
 import axios from 'axios'
+
 function Login(props='') {
     const [ userEmail,setEmail ]    = useState('');
     const [ userPass,setUserPass ]      = useState('')
@@ -28,13 +29,18 @@ function Login(props='') {
     }
 
     const Userlogin = (e) => {
-        const data ={
+        if(userEmail!=="" && userPass !== "") {
+            const data ={
             email : userEmail,
             password : userPass
+            }
+            axios.post('http://localhost:8080/api/user/login',data)
+            .then(res => console.log('token',res))
+            .catch(error=>console.log(error))
+        } else {
+            alert('fill correct information ')
         }
-        axios.post('http://localhost:8080/api/user/login',data)
-        .then(res => console.log('token',res))
-        .catch(error=>console.log(error))
+        
     }
 
     return (
