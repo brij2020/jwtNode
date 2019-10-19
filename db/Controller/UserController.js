@@ -63,6 +63,7 @@ const userList  = async (req,res) => {
 
 
 const userLogin = async (req,res) => {
+    console.log("request",req.body)
     await User.findOne({"email" :req.body.email})
     .then(async (data) =>{
         if(data===null) {

@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
 import * as constant from '../Constant'
 import verifyCorrectPassword from '../utility/validation'
-import axios from 'axios'
 
+import { connect } from 'react-redux'
+import testAction from '../actions/testAction'
+let  actionData = ''
 function Login(props='') {
     const [ userEmail,setEmail ]    = useState('');
     const [ userPass,setUserPass ]      = useState('')
@@ -16,7 +18,6 @@ function Login(props='') {
             // handle Error 
         }
        
-
     }
 
     const setUserPassword = (e) =>{
@@ -29,20 +30,20 @@ function Login(props='') {
     }
 
     const Userlogin = (e) => {
-        if(userEmail!=="" && userPass !== "") {
+        
+        if(userEmail !=="" && userPass !== "") {
             const data ={
             email : userEmail,
             password : userPass
-            }
-            axios.post('http://localhost:8080/api/user/login',data)
-            .then(res => console.log('token',res))
-            .catch(error=>console.log(error))
+             }
+            props.dispatch(testAction(data))
+            
         } else {
             alert('fill correct information ')
         }
         
     }
-
+    console.log("prosp",props,actionData)
     return (
         <div id="id01" className="modal">
   
@@ -71,7 +72,6 @@ function Login(props='') {
                     onBlur={(e)=>setUserPassword(e)}
                     
                 />
-                    
                 <button onClick={(e)=>Userlogin(e)}>Login</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember" /> Remember me
@@ -86,6 +86,7 @@ function Login(props='') {
         </div>
     );
 }
-
-export default Login;
-
+const mapStateToProps = state =>({...state})
+    
+  
+export default connect(mapStateToProps)(Login);
